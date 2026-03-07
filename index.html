@@ -1,21 +1,40 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <meta charset="utf-8">
-    <title>Mon Application Swing</title>
-    <script src="https://cheerpj.com/cheerpj.js"></script>
+    <meta charset="UTF-8">
+    <title>Puissance 4 - Jouer en ligne</title>
+    <!-- 1. Chargez le loader CheerpJ -->
+    <script src="https://cjrtnc.leaningtech.com/3.0/cj3loader.js"></script>
+    <style>
+        /* Optionnel : pour que l'application prenne tout l'écran */
+        html, body {
+            margin: 0;
+            overflow: hidden; /* Évite les barres de défilement inutiles */
+        }
+        #cheerpj-container {
+            width: 100vw;
+            height: 100vh;
+            display: block;
+        }
+    </style>
 </head>
 <body>
-    <script>
-        cheerpjInit({
-            // Options optionnelles
-            javaVersion: '17', // ou '8', '11' selon votre version
-            enableClipboard: true, // pour le presse-papiers
-        });
+    <!-- 2. (Optionnel) Un conteneur pour que l'appli prenne toute la page -->
+    <div id="cheerpj-container"></div>
+
+    <script type="module">
+        // 3. Initialisation de CheerpJ
+        await cheerpjInit();
         
-        // Crée l'affichage et lance l'application
-        cheerpjCreateDisplay(1024, 768);
-        cheerpjRunJar("/app/app.jar");
+        // 4. Création de l'affichage.
+        // Utilisez '-1' pour la largeur et hauteur afin qu'il prenne la taille du conteneur.
+        // Si vous ne voulez pas de conteneur, vous pouvez utiliser cheerpjCreateDisplay(900, 700) avec des dimensions fixes.
+        cheerpjCreateDisplay(-1, -1, document.getElementById("cheerpj-container"));
+
+        // 5. Lancement de votre JAR !
+        // Le chemin "/app/" pointe vers la racine de votre serveur web.
+        // Si votre JAR est dans le même dossier que cette page HTML, utilisez "/app/mon-jeu.jar".
+        await cheerpjRunJar("/app/Puissance4.jar");
     </script>
 </body>
 </html>
